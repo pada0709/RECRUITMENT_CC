@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="join.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시공팀 찾기 사전신청</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <span class="header_title">시공팀 찾기 사전신청</span>
+      </div>
+
+      <div class="banner">
+        <div class="container">
+          <div class="inner">
+            <img class="bn_01" src="img/bn_01.png" />
+          </div>
+          <div class="inner">
+            <img class="bn_02" src="img/bn_02.png" />
+          </div>
+          <div class="inner">
+            <img class="bn_03" src="img/bn_03.png" />
+          </div>
+        </div>
+        <img id="arrow" class="arrow_01" src="img/arrow-down-l.png" />
+        <img id="arrow" class="arrow_02" src="img/arrow-down-l.png" />
+        <div class="ellipse">
+          <img id="1" class="ellipse_01" src="img/Ellipse 24.png" />
+          <img id="2" class="ellipse_02" src="img/Ellipse 25.png" />
+          <img id="3" class="ellipse_03" src="img/Ellipse 26.png" />
+        </div>
+      </div>
+
+      <div class="select_bar">
+        <div class="select_type">
+          <span class="select_type_title">1.필수 입력</span>
+          <span class="select_type_title">2.선택 입력</span>
+        </div>
+        <div class="select_btn">
+          <button class="select_btn_title" type="button">로그인</button>
+          <button class="select_btn_title" type="button">회원가입</button>
+        </div>
+      </div>
+
+      <div class="main_input">
+        <div class="input_column">
+          <span class="input_title"
+            >회사명<span class="input_title_star">*</span></span
+          >
+          <input type="text" placeholder="회사명" />
+        </div>
+        <div class="input_column">
+          <span class="input_title"
+            >대표자명<span class="input_title_star">*</span></span
+          >
+          <input type="text" placeholder="대표자명" />
+        </div>
+        <div class="input_column">
+          <span class="input_title"
+            >이메일<span class="input_title_star">*</span></span
+          >
+          <input type="text" placeholder="이메일" />
+        </div>
+        <div class="input_column">
+          <input class="fileHidden" type="file" />
+          <span class="input_title input_title_s"
+            >사업자등록증<span class="input_title_star">*</span></span
+          >
+          <div id="fileBox" class="input_file">
+            <img src="img/export.png" />
+            <span>파일 업로드</span>
+            <span>(jpeg, png, pdf 3mb 이하)</span>
+          </div>
+        </div>
+
+        <div class="input_column">
+          <div class="input_title_box">
+            <span class="input_title_t input_title_s input_title_f"
+              >주력 공종<span class="input_title_star">*</span></span
+            >
+            <span class="input_title_dup">복수선택 가능</span>
+          </div>
+          <div class="input_select_column">
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>전체</span>
+              </div>
+              <div class="input_select_v">
+                <span>주방가구</span>
+              </div>
+              <div class="input_select_v">
+                <span>붙박이가구</span>
+              </div>
+              <div class="input_select_v">
+                <span>화장실</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>경량</span>
+              </div>
+              <div class="input_select_v">
+                <span>도장</span>
+              </div>
+              <div class="input_select_v">
+                <span>목공</span>
+              </div>
+              <div class="input_select_v">
+                <span>금속</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>후로링</span>
+              </div>
+              <div class="input_select_v">
+                <span>벽지</span>
+              </div>
+              <div class="input_select_v">
+                <span>타일</span>
+              </div>
+              <div class="input_select_v">
+                <span>대리석</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>카페트</span>
+              </div>
+              <div class="input_select_v">
+                <span>유리</span>
+              </div>
+              <div class="input_select_v">
+                <span>창호</span>
+              </div>
+              <div class="input_select_v">
+                <span>실리콘</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>준공청소</span>
+              </div>
+              <div class="input_select_v">
+                <span>설비</span>
+              </div>
+              <div class="input_select_v">
+                <span>전기</span>
+              </div>
+              <div class="input_select_v">
+                <span>철거</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>건축</span>
+              </div>
+              <div class="input_select_v">
+                <span>토목</span>
+              </div>
+              <div class="input_select_v">
+                <span>일당용역</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input_column">
+          <div class="input_title_box">
+            <span class="input_title_t input_title_s"
+              >주력시공공간<span class="input_title_star">*</span></span
+            >
+            <span class="input_title_dup">복수선택 가능</span>
+          </div>
+          <div class="input_select_column">
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>아파트</span>
+              </div>
+              <div class="input_select_v">
+                <span>소규모 상업공간</span>
+              </div>
+              <div class="input_select_v">
+                <span>대형 상업공간</span>
+              </div>
+              <div class="input_select_v">
+                <span>대형사 협력사</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input_column">
+          <div class="input_title_box">
+            <span class="input_title_t input_title_s"
+              >시공지역<span class="input_title_star">*</span></span
+            >
+            <span class="input_title_dup">복수선택 가능</span>
+          </div>
+          <div class="input_select_column">
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>전국</span>
+              </div>
+              <div class="input_select_v">
+                <span>서울</span>
+              </div>
+              <div class="input_select_v">
+                <span>부산</span>
+              </div>
+              <div class="input_select_v">
+                <span>대구</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>인천</span>
+              </div>
+              <div class="input_select_v">
+                <span>광주</span>
+              </div>
+              <div class="input_select_v">
+                <span>대전</span>
+              </div>
+              <div class="input_select_v">
+                <span>울산</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>세종</span>
+              </div>
+              <div class="input_select_v">
+                <span>경기</span>
+              </div>
+              <div class="input_select_v">
+                <span>강원</span>
+              </div>
+              <div class="input_select_v">
+                <span>충북</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>충남</span>
+              </div>
+              <div class="input_select_v">
+                <span>전북</span>
+              </div>
+              <div class="input_select_v">
+                <span>전남</span>
+              </div>
+              <div class="input_select_v">
+                <span>경북</span>
+              </div>
+            </div>
+            <div class="input_select">
+              <div class="input_select_v">
+                <span>경남</span>
+              </div>
+              <div class="input_select_v">
+                <span>제주</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input_column">
+          <span class="input_title input_title_s"
+            >설립일<span class="input_title_star">*</span></span
+          >
+          <div class="input_num">
+            <span>설립일 선택</span>
+            <input class="dateHidden" type="date" />
+            <img id="select_date" src="img/Calendar_today_black.png" />
+          </div>
+        </div>
+
+        <div class="input_column">
+          <span class="input_title input_title_s"
+            >직원수<span class="input_title_star">*</span></span
+          >
+          <div class="selectNumBox">
+            <button class="labelNum">직원수 선택</button>
+            <ul class="optionListNum closeOptionListNum">
+              <li class="optionNum">1인</li>
+              <li class="optionNum">5인 이하</li>
+              <li class="optionNum">10인 이하</li>
+              <li class="optionNum">20인 이하</li>
+              <li class="optionNum">21인 이상</li>
+            </ul>
+            <!-- <select class="selectNum">
+              <option disabled selected>직원수 선택</option>
+              <option value="num_1">1인</option>
+              <option value="num_2">5인 이하</option>
+              <option value="num_3">10인 이하</option>
+              <option value="num_4">20인 미만</option>
+              <option value="num_5">21인 이상</option>
+            </select> -->
+            <img class="arrowNum" src="img/arrow-down-02.png" />
+          </div>
+        </div>
+
+        <div class="input_column">
+          <span class="input_title input_title_s"
+            >시공경력<span class="input_title_star">*</span></span
+          >
+          <div class="input_num">
+            <span>시공경력 선택</span>
+            <img src="img/arrow-down-02.png" />
+          </div>
+        </div>
+
+        <div class="input_column">
+          <span class="input_title"
+            >주요거래처<span class="input_title_star">*</span></span
+          >
+          <input type="text" placeholder="주요거래처들을 입력해주세요" />
+        </div>
+
+        <div class="input_column">
+          <div class="input_next">
+            <div class="input_next_btn">
+              <span>다음</span>
+              <img src="img/arrow-down-r.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="naya">
+        <div class="naya_logo">
+          <img src="img/naya-logo.png" />
+        </div>
+        <div class="naya_company">
+          <span>주식회사 씨투와이 | 대표이사: 문준철</span>
+          <span>전화번호: (국번없이)1644-4908</span>
+          <span
+            >주소: 서울특별시 마포구 백범로31길 21 서울창업허브 본관 720호</span
+          >
+          <span>사업자등록번호: 896-81-01068</span>
+          <span
+            >계좌번호: KB국민은행 827901-04-135256 | 우리은행
+            1005-904-657215</span
+          >
+        </div>
+        <div class="naya_privity">
+          <span>개인정보처리방침</span>
+          <span>이용약관</span>
+          <span>전자금융거래이용약관</span>
+          <span>고객센터</span>
+          <span>오시는길</span>
+          <span>ⓒC2Y INC. ALL RIGHT RESERVED</span>
+        </div>
+      </div>
+    </footer>
+    <script src="join.js"></script>
+  </body>
+</html>
