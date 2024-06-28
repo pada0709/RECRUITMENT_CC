@@ -81,8 +81,15 @@ function showBanner(btnItem) {
 const selectNumBox = document.querySelector(".selectNumBox");
 const labelNum = document.querySelector(".labelNum");
 const optionListNum = document.querySelector(".optionListNum");
+const optionNum = document.querySelectorAll(".optionNum");
+const arrowNum = document.querySelector(".arrowNum");
 
 selectNumBox.addEventListener("click", () => {
+  if (arrowNum.classList.contains("arrowNumRotate")) {
+    arrowNum.classList.remove("arrowNumRotate");
+  } else {
+    arrowNum.classList.add("arrowNumRotate");
+  }
   if (optionListNum.classList.contains("closeOptionListNum")) {
     optionListNum.classList.remove("closeOptionListNum");
     optionListNum.classList.add("openOptionListNum");
@@ -92,4 +99,42 @@ selectNumBox.addEventListener("click", () => {
     optionListNum.classList.add("closeOptionListNum");
     selectNumBox.classList.remove("selectNumBoxBorder");
   }
+});
+
+optionNum.forEach((optionItem) => {
+  optionItem.addEventListener("click", () => {
+    labelNum.innerHTML = optionItem.innerHTML;
+    arrowNum.classList.remove("arrowNumRotate");
+  });
+});
+
+// 시공경력 드롭다운
+const selectNumBox_2 = document.querySelector(".selectNumBox_2");
+const labelNum_2 = document.querySelector(".labelNum_2");
+const optionListNum_2 = document.querySelector(".optionListNum_2");
+const optionNum_2 = document.querySelectorAll(".optionNum_2");
+const arrowNum_2 = document.querySelector(".arrowNum_2");
+
+selectNumBox_2.addEventListener("click", () => {
+  if (arrowNum_2.classList.contains("arrowNumRotate")) {
+    arrowNum_2.classList.remove("arrowNumRotate");
+  } else {
+    arrowNum_2.classList.add("arrowNumRotate");
+  }
+  if (optionListNum_2.classList.contains("closeOptionListNum")) {
+    optionListNum_2.classList.remove("closeOptionListNum");
+    optionListNum_2.classList.add("openOptionListNum");
+    selectNumBox_2.classList.add("selectNumBoxBorder");
+  } else {
+    optionListNum_2.classList.remove("openOptionListNum");
+    optionListNum_2.classList.add("closeOptionListNum");
+    selectNumBox_2.classList.remove("selectNumBoxBorder");
+  }
+});
+
+optionNum_2.forEach((optionItem) => {
+  optionItem.addEventListener("click", () => {
+    labelNum_2.innerHTML = optionItem.innerHTML;
+    arrowNum_2.classList.remove("arrowNumRotate");
+  });
 });

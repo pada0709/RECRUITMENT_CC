@@ -1,3 +1,10 @@
+/* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+  position: relative;
+}
+ */
 body {
   width: 100%;
   background: #f8f9fa;
@@ -389,21 +396,34 @@ body {
 
 /* 선택 드롭박스 */
 
-.selectNumBox * {
+.selectNumBox_2 * {
   box-sizing: border-box;
 }
 
 .selectNumBox {
   position: relative;
   width: 380px;
-  /* height: 44px; */
-  padding: 11px;
+  padding: 10px;
   padding-left: 14px;
   margin: 19px 20px;
   border-radius: 8px;
   border: 1px solid #c4c4c4;
   background: #fff;
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+.selectNumBox_2 {
+  position: relative;
+  width: 380px;
+  padding: 10px;
+  padding-left: 14px;
+  margin: 19px 20px;
+  border-radius: 8px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .selectNumBoxBorder {
@@ -423,25 +443,58 @@ body {
   font-weight: 400;
   line-height: normal;
   cursor: pointer;
+  padding: 0;
+}
+
+.selectNumBox_2 .labelNum_2 {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  border: 0;
+  background: none;
+  color: var(--Gray, #7a7a7a);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  padding: 0;
 }
 
 .selectNumBox .optionListNum {
   position: absolute;
   overflow: hidden;
-  left: 0;
-  top: 30px;
-  /* border: 1px solid #c4c4c4; */
+  left: -1px;
+  top: 25px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
-  width: 100%;
+  width: 380px;
   list-style-type: none;
-  padding: 0;
+  padding: 0px;
   color: var(--black, #333);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  /* max-height: 0; */
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.selectNumBox_2 .optionListNum_2 {
+  position: absolute;
+  overflow: hidden;
+  left: -0.6px;
+  top: 25px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  width: 380px;
+  list-style-type: none;
+  padding: 0px;
+  color: var(--black, #333);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
   background-color: white;
 }
 
@@ -451,20 +504,46 @@ body {
 
 .openOptionListNum {
   border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
 .selectNumBox .optionNum:hover {
   background: #f7f7f7;
 }
 
+.selectNumBox_2 .optionNum_2:hover {
+  background: #f7f7f7;
+}
+
 .optionListNum .optionNum {
-  padding: 10px;
+  padding: 15px;
+  position: relative;
+  box-sizing: border-box;
+  width: 380px;
+}
+
+.optionListNum_2 .optionNum_2 {
+  padding: 15px;
+  /* position: absolute; */
+  box-sizing: border-box;
+  width: 380px;
 }
 
 .arrowNum {
   position: absolute;
-  top: 11px;
-  right: 28px;
+  top: 9px;
+  right: 23px;
+}
+
+.arrowNum_2 {
+  position: absolute;
+  top: 9px;
+  right: 23px;
+}
+
+.arrowNumRotate {
+  transform: rotate(180deg);
 }
 
 .selectNum {
