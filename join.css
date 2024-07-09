@@ -505,6 +505,12 @@ body {
 .openOptionListNum {
   border: 1px solid #c4c4c4;
   box-sizing: border-box;
+  z-index: 2;
+}
+
+.openOptionListNum_2 {
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
   z-index: 1;
 }
 
@@ -544,6 +550,10 @@ body {
 
 .arrowNumRotate {
   transform: rotate(180deg);
+}
+
+.arrowNumRotate_2 {
+  transform: rotate(0deg);
 }
 
 .selectNum {
@@ -716,4 +726,71 @@ footer {
 .tdStyle {
   border: solid 1px black;
   padding: 20px 20px;
+}
+
+.tdTagStyle {
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  box-sizing: border-box;
+}
+
+.spanTagStyle_hover:hover {
+  background-color: gainsboro;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.spanTagStyle {
+  display: block;
+  padding: 5px 5px;
+}
+
+.spanTodayTagStyle {
+  border-radius: 50%;
+  color:white;
+  background-color: red;
+}
+
+.captionTagStyle {
+  font-size: larger;
+  font-weight: bolder;
+  color:red;
+  text-align: left;
+  padding:25px 10px;
+  padding-left: 0px;
+}
+
+.input_column {
+  position: relative;
+}
+
+#calendar {
+  position: absolute;
+  border: solid 1px black;
+  padding:20px 30px;
+  padding-top:0px;
+  left: 160px;
+  top:70px;
+  background-color: white;
+  z-index: 3;
+}
+
+.thTagStyle {
+  padding-bottom: 15px;
+}
+
+.span_date {
+  width: 100%;
+  color: gray;
+}
+
+.calendar_hidden {
+   display: none;
+}
+
+.select_date {
+  cursor: pointer;
 }

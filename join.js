@@ -85,6 +85,9 @@ const optionNum = document.querySelectorAll(".optionNum");
 const arrowNum = document.querySelector(".arrowNum");
 
 selectNumBox.addEventListener("click", () => {
+  if(arrowNum.classList.contains("arrowNumRotate_2")) {
+    arrowNum.classList.remove("arrowNumRotate_2");
+  }
   if (arrowNum.classList.contains("arrowNumRotate")) {
     arrowNum.classList.remove("arrowNumRotate");
   } else {
@@ -104,7 +107,7 @@ selectNumBox.addEventListener("click", () => {
 optionNum.forEach((optionItem) => {
   optionItem.addEventListener("click", () => {
     labelNum.innerHTML = optionItem.innerHTML;
-    arrowNum.classList.remove("arrowNumRotate");
+    arrowNum.classList.add("arrowNumRotate_2");
   });
 });
 
@@ -116,6 +119,9 @@ const optionNum_2 = document.querySelectorAll(".optionNum_2");
 const arrowNum_2 = document.querySelector(".arrowNum_2");
 
 selectNumBox_2.addEventListener("click", () => {
+  if(arrowNum_2.classList.contains("arrowNumRotate_2")) {
+    arrowNum_2.classList.remove("arrowNumRotate_2");
+  }
   if (arrowNum_2.classList.contains("arrowNumRotate")) {
     arrowNum_2.classList.remove("arrowNumRotate");
   } else {
@@ -123,10 +129,10 @@ selectNumBox_2.addEventListener("click", () => {
   }
   if (optionListNum_2.classList.contains("closeOptionListNum")) {
     optionListNum_2.classList.remove("closeOptionListNum");
-    optionListNum_2.classList.add("openOptionListNum");
+    optionListNum_2.classList.add("openOptionListNum_2");
     selectNumBox_2.classList.add("selectNumBoxBorder");
   } else {
-    optionListNum_2.classList.remove("openOptionListNum");
+    optionListNum_2.classList.remove("openOptionListNum_2");
     optionListNum_2.classList.add("closeOptionListNum");
     selectNumBox_2.classList.remove("selectNumBoxBorder");
   }
@@ -135,7 +141,7 @@ selectNumBox_2.addEventListener("click", () => {
 optionNum_2.forEach((optionItem) => {
   optionItem.addEventListener("click", () => {
     labelNum_2.innerHTML = optionItem.innerHTML;
-    arrowNum_2.classList.remove("arrowNumRotate");
+    arrowNum_2.classList.add("arrowNumRotate_2");
   });
 });
 
@@ -158,7 +164,7 @@ if(calendarYear % 400 == 0) {
 //let calendarMonthLastDate = monthDays[date.getMonth()];
 
 //달의 마지막일 계산 방법 2
-let monthLastDate = new Date(calendarYear, calendarMonth, -1)  //일자가 0이면 마지막 일자 자동 계산
+let monthLastDate = new Date(calendarYear, calendarMonth, 0)  //일자가 0이면 마지막 일자 자동 계산
 console.log(calendarMonth);
 console.log(date.getMonth());
 let calendarMonthLastDate = monthLastDate.getDate();
@@ -166,7 +172,7 @@ console.log(monthLastDate);
 
 
 //월의 시작 요일
-let monthStartDay = new Date(calendarYear, date.getMonth(), 1); //??
+let monthStartDay = new Date(calendarYear, date.getMonth(), 1); //Date클래스는 일수 자동 +1
 let calendarMonthStartDay = monthStartDay.getDate();
 console.log(monthStartDay);
 // console.log(calendarMonthStartDay); //0이 일요일
@@ -175,28 +181,122 @@ console.log(date.getMonth());
 //주 수 카운트
 let calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7);
 
-//달력 border 그리기
+// 달력 img 클릭시 이벤트
 const calendar = document.querySelector("#calendar");
-const tableTagCreate = document.createElement("table");
-let trTagCreate;
-let tdTagCreate;
+const imgDate = document.querySelector(".select_date");
+
+imgDate.addEventListener("click", () => {
+  if (calendar.classList.contains("calendar_hidden")) {
+    calendar.classList.remove("calendar_hidden");
+  } else {
+    calendar.classList.add("calendar_hidden");
+  }
+})
+
+//달력 그리기
+tableTagCreate = document.createElement("table");
 
 tableTagCreate.classList.add("tableStyle");
 const tableTag = calendar.appendChild(tableTagCreate);
-let trTag;
+
+let captionTagCreate = document.createElement("caption"); //월 표시
+const captionTag = tableTag.appendChild(captionTagCreate);
+captionTag.innerHTML = calendarYear + "년" + " ";
+captionTag.innerHTML += calendarMonth + "월";
+captionTag.classList.add("captionTagStyle");
+
+let theadTagCreate = document.createElement("thead"); //요일 표시
+const theadTag = tableTag.appendChild(theadTagCreate);
+
+let trTagCreate = document.createElement("tr");
+let trTag = theadTag.appendChild(trTagCreate);
+
+// let thTagCreate = document.createElement("th"); 
+// thTagCreate.innerHTML = "일";
+// let thTag = trTag.appendChild(thTagCreate);
+// thTagCreate = document.createElement("th");
+// thTagCreate.innerHTML = "월";
+// thTag = trTag.appendChild(thTagCreate);
+// thTagCreate = document.createElement("th");
+// thTagCreate.innerHTML = "화";
+// thTag = trTag.appendChild(thTagCreate);
+// thTagCreate = document.createElement("th");
+// thTagCreate.innerHTML = "수";
+// thTag = trTag.appendChild(thTagCreate);
+// thTagCreate = document.createElement("th");
+// thTagCreate.innerHTML = "목";
+// thTag = trTag.appendChild(thTagCreate);
+// thTagCreate = document.createElement("th");
+// thTagCreate.innerHTML = "금";
+// thTag = trTag.appendChild(thTagCreate);
+// thTagCreate = document.createElement("th");
+// thTagCreate.innerHTML = "토";
+// thTag = trTag.appendChild(thTagCreate);
+// thTag.classList.add("thTagStyle");
+
+let days = ["일","월","화","수","목","금","토"];
+let thTagCreate;
+let thTag;
+
+for(let i=0; i<7; i++) {
+  thTagCreate = document.createElement("th");
+  thTagCreate.innerHTML = days[i];
+  thTag = trTag.appendChild(thTagCreate);
+  thTag.classList.add("thTagStyle");
+}
+
+let spanTagCreate;
+let spanTag;
+
+let calendarPos = 0;  //위치
+let calendarDay = 0;  //날짜
 
 for(let i=0; i<calendarWeekCount; i++) {
-  trTagCreate = document.createElement("tr");
+  trTagCreate = document.createElement("tr"); //행
   trTag = tableTag.appendChild(trTagCreate);
   for(let j=0; j<7; j++) {
-    tdTagCreate = document.createElement("td");
+    tdTagCreate = document.createElement("td"); //열
     tdTag = trTag.appendChild(tdTagCreate);
-    tdTag.classList.add("tdStyle");
+    tdTag.classList.add("tdTagStyle");
+
+    //7월은 월요일부터 시작, 1<=0 거짓 -> 한칸비우고 시작
+    //달의 마지막일까지만 출력
+    if(calendarMonthStartDay <= calendarPos && calendarDay < calendarMonthLastDate) { 
+      calendarDay++;
+      spanTagCreate = document.createElement("span");
+      spanTagCreate.innerHTML = calendarDay;
+      spanTag = tdTag.appendChild(spanTagCreate);
+      spanTag.classList.add("spanTagStyle");
+      spanTag.parentElement.classList.add("spanTagStyle_hover");
+      // if(calendarDay == calendarToday) {
+      //   tdTag.classList.add("spanTodayTagStyle");
+      // }
+    }
+    calendarPos++;
   }
 }
 
-//달력 Day 그리기
-tableTagCreate_Days = document.createElement("table");
+function handleDayPrint(event) {
+  const selectDay = event.target.parentElement;
+  inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
+  
+  selectDay.classList.add("spanTodayTagStyle");
+  //console.log(selectDay.innerText);
+  console.log(selectDay);
+}
+
+let s = document.querySelectorAll(".tdTagStyle");
+let inputDate = document.querySelector(".span_date");
+
+s.forEach((boxItem) => {
+  boxItem.addEventListener("click",handleDayPrint)});
+
+// tdTagCreate.forEach((s) => {
+//   s.addEventListener("click", handleDayPrint);
+// })
+// tdTagCreate.addEventListener("click", handleDayPrint);
+console.log(tdTagCreate);
+
 
 
 // let html = "";
