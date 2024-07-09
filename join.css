@@ -708,3 +708,12 @@ footer {
 .dateHidden {
   display: none;
 }
+
+.tableStyle {
+  border-collapse: collapse;
+}
+
+.tdStyle {
+  border: solid 1px black;
+  padding: 20px 20px;
+}

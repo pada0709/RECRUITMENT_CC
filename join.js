@@ -138,3 +138,84 @@ optionNum_2.forEach((optionItem) => {
     arrowNum_2.classList.remove("arrowNumRotate");
   });
 });
+
+// 달력 그리기
+let date = new Date();
+let calendarYear = date.getFullYear();
+let calendarMonth = date.getMonth() + 1;
+let calendarToday = date.getDate();
+
+//달의 마지막일 계산 방법 1
+const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] //윤년계산
+if(calendarYear % 400 == 0) {
+  monthDays[1] = 29;
+} else if(calendarYear % 100 == 0) {
+  monthDays[1] = 28;
+} else if(calendarYear % 4 == 0) {
+  monthDays[1] = 29;
+} //2월 29일은 4년 주기,,
+
+//let calendarMonthLastDate = monthDays[date.getMonth()];
+
+//달의 마지막일 계산 방법 2
+let monthLastDate = new Date(calendarYear, calendarMonth, -1)  //일자가 0이면 마지막 일자 자동 계산
+console.log(calendarMonth);
+console.log(date.getMonth());
+let calendarMonthLastDate = monthLastDate.getDate();
+console.log(monthLastDate);
+
+
+//월의 시작 요일
+let monthStartDay = new Date(calendarYear, date.getMonth(), 1); //??
+let calendarMonthStartDay = monthStartDay.getDate();
+console.log(monthStartDay);
+// console.log(calendarMonthStartDay); //0이 일요일
+console.log(date.getMonth());
+
+//주 수 카운트
+let calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7);
+
+//달력 border 그리기
+const calendar = document.querySelector("#calendar");
+const tableTagCreate = document.createElement("table");
+let trTagCreate;
+let tdTagCreate;
+
+tableTagCreate.classList.add("tableStyle");
+const tableTag = calendar.appendChild(tableTagCreate);
+let trTag;
+
+for(let i=0; i<calendarWeekCount; i++) {
+  trTagCreate = document.createElement("tr");
+  trTag = tableTag.appendChild(trTagCreate);
+  for(let j=0; j<7; j++) {
+    tdTagCreate = document.createElement("td");
+    tdTag = trTag.appendChild(tdTagCreate);
+    tdTag.classList.add("tdStyle");
+  }
+}
+
+//달력 Day 그리기
+tableTagCreate_Days = document.createElement("table");
+
+
+// let html = "";
+// html += "<table style=\"border-collapse: collapse;\"";
+// for(let i=0; i<calendarWeekCount; i++) {
+//   html += "<tr>";
+//   for(let j=0; j<7; j++) {
+//     html += "<td style=\"border: solid 1px black; padding: 20px 20px;\"></td>";
+//   }
+//   html += "</tr>";
+// }
+// html += "</table>";
+// $("#calendar").html(html);
+
+
+
+
+
+
+
+
+
