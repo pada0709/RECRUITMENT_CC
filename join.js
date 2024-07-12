@@ -147,8 +147,18 @@ optionNum_2.forEach((optionItem) => {
 
 // 달력 그리기
 let date = new Date();
-let calendarYear = date.getFullYear();
-let calendarMonth = date.getMonth() + 1;
+// let calendarYear = date.getFullYear();
+// let calendarMonth = date.getMonth() + 1;
+
+let calendarYear = 2025;
+let calendarMonth = 8;
+
+function addCalDay(event) {
+  calendarYear += 1;
+  calendarMonth += 1;
+  console.log("jdfslk");
+}
+
 let calendarToday = date.getDate();
 
 //달의 마지막일 계산 방법 1
@@ -165,17 +175,17 @@ if(calendarYear % 400 == 0) {
 
 //달의 마지막일 계산 방법 2
 let monthLastDate = new Date(calendarYear, calendarMonth, 0)  //일자가 0이면 마지막 일자 자동 계산
-console.log(calendarMonth);
-console.log(date.getMonth());
+// console.log(calendarMonth);
+// console.log(date.getMonth());
 let calendarMonthLastDate = monthLastDate.getDate();
 console.log(monthLastDate);
 
-
 //월의 시작 요일
-let monthStartDay = new Date(calendarYear, date.getMonth(), 1); //Date클래스는 일수 자동 +1
-let calendarMonthStartDay = monthStartDay.getDate();
+let monthStartDay = new Date(calendarYear, 9, 1); //Date클래스는 일수 자동 +1
+console.log("ddddd: "+ calendarYear);
+let calendarMonthStartDay = monthStartDay.getDay();
 console.log(monthStartDay);
-// console.log(calendarMonthStartDay); //0이 일요일
+console.log("qqqqq:" + calendarMonthStartDay); //0이 일요일
 console.log(date.getMonth());
 
 //주 수 카운트
@@ -280,40 +290,9 @@ let s = document.querySelectorAll(".spanTagStyle");
 let d = document.querySelectorAll(".tdTagStyle");
 
 function handleDayPrint(event) {
-  const selectDay = event.target.parentElement;
+  // const selectDay = event.target;
+  const selectDay = event.target.tagName === 'SPAN' ? event.target.parentElement : event.target;
   inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
-  // console.log("!!!!"+s);
-  
-  s.forEach((item) => {
-    if(item.classList.contains("spanTodayTagStyle")) {
-      item.classList.remove("spanTodayTagStyle");
-      item.parentNode.classList.add("spanTagStyle_hover");
-      console.log("sssssssss");
-    }
-  })
-
-  d.forEach((item) => {
-    if(item.classList.contains("spanTodayTagStyle")) {
-      item.classList.remove("spanTodayTagStyle");
-      item.classList.add("spanTagStyle_hover");
-      console.log("dddddddddd");
-    }
-  })
-
-  selectDay.classList.add("spanTodayTagStyle");
-  selectDay.classList.remove("spanTagStyle_hover");
-  console.log("이거ㅓㅓㅓ");
-}
-
-function handleDayPrint_2(event) {
-  const selectDay = event.target;
-  inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
-  console.log("!!!!"+s);
-
-  // if(s.classList.contains("spanTodayTagStyle") && d.classList.contains("spanTodayTagStyle")) {
-  //   s.classList.remove(".spanTodayTagStyle");
-  //   d.classList.remove(".spanTodayTagStyle");
-  // }
 
   s.forEach((item) => {
     if(item.classList.contains("spanTodayTagStyle")) {
@@ -338,20 +317,14 @@ function handleDayPrint_2(event) {
 
 let inputDate = document.querySelector(".span_date");
 
-s.forEach((boxItem) => {
-  boxItem.addEventListener("click",handleDayPrint)});
+// s.forEach((boxItem) => {
+//   boxItem.addEventListener("click",handleDayPrint)});
 
 d.forEach((boxItem) => {
-  boxItem.addEventListener("click",handleDayPrint_2)});
+  boxItem.addEventListener("click",handleDayPrint)});
+
+captionTag.addEventListener("click", addCalDay);
   
-
-// tdTagCreate.forEach((s) => {
-//   s.addEventListener("click", handleDayPrint);
-// })
-// tdTagCreate.addEventListener("click", handleDayPrint);
-console.log(tdTagCreate);
-
-
 
 // let html = "";
 // html += "<table style=\"border-collapse: collapse;\"";
