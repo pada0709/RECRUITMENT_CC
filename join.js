@@ -276,20 +276,43 @@ for(let i=0; i<calendarWeekCount; i++) {
   }
 }
 
+let s = document.querySelectorAll(".spanTagStyle");
+let d = document.querySelectorAll(".tdTagStyle");
+
 function handleDayPrint(event) {
   const selectDay = event.target.parentElement;
   inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
+  console.log("!!!!"+s);
   
+  if(s.classList.contains("spanTodayTagStyle") && d.classList.contains("spanTodayTagStyle")) {
+    s.classList.remove(".spanTodayTagStyle");
+    d.classList.remove(".spanTodayTagStyle");
+  }
   selectDay.classList.add("spanTodayTagStyle");
-  //console.log(selectDay.innerText);
-  console.log(selectDay);
+  selectDay.classList.remove("spanTagStyle_hover");
 }
 
-let s = document.querySelectorAll(".tdTagStyle");
+function handleDayPrint_2(event) {
+  const selectDay = event.target;
+  inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
+  console.log("!!!!"+s);
+
+  if(s.classList.contains("spanTodayTagStyle") && d.classList.contains("spanTodayTagStyle")) {
+    s.classList.remove(".spanTodayTagStyle");
+    d.classList.remove(".spanTodayTagStyle");
+  }
+  selectDay.classList.add("spanTodayTagStyle");
+  selectDay.classList.remove("spanTagStyle_hover");
+}
+
 let inputDate = document.querySelector(".span_date");
 
 s.forEach((boxItem) => {
   boxItem.addEventListener("click",handleDayPrint)});
+
+d.forEach((boxItem) => {
+  boxItem.addEventListener("click",handleDayPrint_2)});
+  
 
 // tdTagCreate.forEach((s) => {
 //   s.addEventListener("click", handleDayPrint);
