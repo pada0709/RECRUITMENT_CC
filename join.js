@@ -282,14 +282,27 @@ let d = document.querySelectorAll(".tdTagStyle");
 function handleDayPrint(event) {
   const selectDay = event.target.parentElement;
   inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
-  console.log("!!!!"+s);
+  // console.log("!!!!"+s);
   
-  if(s.classList.contains("spanTodayTagStyle") && d.classList.contains("spanTodayTagStyle")) {
-    s.classList.remove(".spanTodayTagStyle");
-    d.classList.remove(".spanTodayTagStyle");
-  }
+  s.forEach((item) => {
+    if(item.classList.contains("spanTodayTagStyle")) {
+      item.classList.remove("spanTodayTagStyle");
+      item.parentNode.classList.add("spanTagStyle_hover");
+      console.log("sssssssss");
+    }
+  })
+
+  d.forEach((item) => {
+    if(item.classList.contains("spanTodayTagStyle")) {
+      item.classList.remove("spanTodayTagStyle");
+      item.classList.add("spanTagStyle_hover");
+      console.log("dddddddddd");
+    }
+  })
+
   selectDay.classList.add("spanTodayTagStyle");
   selectDay.classList.remove("spanTagStyle_hover");
+  console.log("이거ㅓㅓㅓ");
 }
 
 function handleDayPrint_2(event) {
@@ -297,12 +310,30 @@ function handleDayPrint_2(event) {
   inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
   console.log("!!!!"+s);
 
-  if(s.classList.contains("spanTodayTagStyle") && d.classList.contains("spanTodayTagStyle")) {
-    s.classList.remove(".spanTodayTagStyle");
-    d.classList.remove(".spanTodayTagStyle");
-  }
+  // if(s.classList.contains("spanTodayTagStyle") && d.classList.contains("spanTodayTagStyle")) {
+  //   s.classList.remove(".spanTodayTagStyle");
+  //   d.classList.remove(".spanTodayTagStyle");
+  // }
+
+  s.forEach((item) => {
+    if(item.classList.contains("spanTodayTagStyle")) {
+      item.classList.remove("spanTodayTagStyle");
+      item.parentNode.classList.add("spanTagStyle_hover");
+      console.log("sssssssss");
+    }
+  })
+
+  d.forEach((item) => {
+    if(item.classList.contains("spanTodayTagStyle")) {
+      item.classList.remove("spanTodayTagStyle");
+      item.classList.add("spanTagStyle_hover");
+      console.log("dddddddddd");
+    }
+  })
+
   selectDay.classList.add("spanTodayTagStyle");
   selectDay.classList.remove("spanTagStyle_hover");
+  console.log("저거ㅓㅓㅓㅓㅓㅓ");
 }
 
 let inputDate = document.querySelector(".span_date");
