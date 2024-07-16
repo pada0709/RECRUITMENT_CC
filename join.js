@@ -150,38 +150,10 @@ let date = new Date();
 // let calendarYear = date.getFullYear();
 // let calendarMonth = date.getMonth() + 1;
 
-let calendarYear = 2025;
-let calendarMonth = 8;
+let calendarYear = 2024;
+let calendarMonth = 7;
 
 let calendarToday = date.getDate();
-
-//달의 마지막일 계산 방법 1
-const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] //윤년계산
-if(calendarYear % 400 == 0) {
-  monthDays[1] = 29;
-} else if(calendarYear % 100 == 0) {
-  monthDays[1] = 28;
-} else if(calendarYear % 4 == 0) {
-  monthDays[1] = 29;
-} //2월 29일은 4년 주기,,
-
-//let calendarMonthLastDate = monthDays[date.getMonth()];
-
-//달의 마지막일 계산 방법 2
-let monthLastDate = new Date(calendarYear, calendarMonth, 0)  //일자가 0이면 마지막 일자 자동 계산
-let calendarMonthLastDate = monthLastDate.getDate();
-console.log(monthLastDate);
-
-//월의 시작 요일
-let monthStartDay = new Date(calendarYear, 9, 1); //Date클래스는 일수 자동 +1
-console.log("ddddd: "+ calendarYear);
-let calendarMonthStartDay = monthStartDay.getDay();
-console.log(monthStartDay);
-console.log("qqqqq:" + calendarMonthStartDay); //0이 일요일
-console.log(date.getMonth());
-
-//주 수 카운트
-let calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7);
 
 // 달력 img 클릭시 이벤트
 const calendar = document.querySelector("#calendar");
@@ -203,8 +175,6 @@ const tableTag = calendar.appendChild(tableTagCreate);
 
 let captionTagCreate = document.createElement("caption"); //월 표시
 const captionTag = tableTag.appendChild(captionTagCreate);
-captionTag.innerHTML = calendarYear + "년" + " ";
-captionTag.innerHTML += calendarMonth + "월";
 captionTag.classList.add("captionTagStyle");
 
 let theadTagCreate = document.createElement("thead"); //요일 표시
@@ -224,35 +194,82 @@ for(let i=0; i<7; i++) {
   thTag.classList.add("thTagStyle");
 }
 
-let spanTagCreate;
-let spanTag;
+let trTagCreateArr = new Array();
+let tdTagCreateArr = new Array();
 
-let calendarPos = 0;  //위치
-let calendarDay = 0;  //날짜
-
-for(let i=0; i<calendarWeekCount; i++) {
-  trTagCreate = document.createElement("tr"); //행
+for(let i=0; i<6; i++) {
+  trTagCreateArr[i] = document.createElement("tr"); //행
   trTag = tableTag.appendChild(trTagCreate);
+  tdTagCreateArr[i] = new Array(7);
   for(let j=0; j<7; j++) {
-    tdTagCreate = document.createElement("td"); //열
+    tdTagCreateArr[i][j] = document.createElement("td"); //열
     tdTag = trTag.appendChild(tdTagCreate);
     tdTag.classList.add("tdTagStyle");
-    tdTag.classList.add("NumBlank");
-
-    //7월은 월요일부터 시작, 1<=0 거짓 -> 한칸비우고 시작
-    //달의 마지막일까지만 출력
-    if(calendarMonthStartDay <= calendarPos && calendarDay < calendarMonthLastDate) { 
-      calendarDay++;
-      spanTagCreate = document.createElement("span");
-      spanTagCreate.innerHTML = calendarDay;
-      spanTag = tdTag.appendChild(spanTagCreate);
-      spanTag.classList.add("spanTagStyle");
-      spanTag.parentElement.classList.add("spanTagStyle_hover");
-      tdTag.classList.remove("NumBlank");
-    }
-    calendarPos++;
   }
 }
+
+function DrawCalDay() {
+  //달의 마지막일 계산 방법 1
+  const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] //윤년계산
+  if(calendarYear % 400 == 0) {
+    monthDays[1] = 29;
+  } else if(calendarYear % 100 == 0) {
+    monthDays[1] = 28;
+  } else if(calendarYear % 4 == 0) {
+    monthDays[1] = 29;
+  } //2월 29일은 4년 주기,,
+
+  //let calendarMonthLastDate = monthDays[date.getMonth()];
+
+  //달의 마지막일 계산 방법 2
+  let monthLastDate = new Date(calendarYear, calendarMonth, 0)  //일자가 0이면 마지막 일자 자동 계산
+  let calendarMonthLastDate = monthLastDate.getDate();
+  console.log(monthLastDate);
+
+  //월의 시작 요일
+  let monthStartDay = new Date(calendarYear, calendarMonth-1, 1); //Date클래스는 일수 자동 +1
+  console.log("ddddd: "+ calendarYear);
+  let calendarMonthStartDay = monthStartDay.getDay();
+  console.log(monthStartDay);
+  console.log("qqqqq:" + calendarMonthStartDay); //0이 일요일
+  console.log(date.getMonth());
+
+  //주 수 카운트
+  let calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7);
+  captionTag.innerHTML = calendarYear + "년" + " ";
+  captionTag.innerHTML += calendarMonth + "월";
+
+  let spanTagCreate,spanTag;
+
+  let calendarPos = 0;  //위치
+  let calendarDay = 0;  //날짜
+
+  for(let i=0; i<calendarWeekCount; i++) {
+    trTagCreate = document.createElement("tr"); //행
+    trTag = tableTag.appendChild(trTagCreate);
+    for(let j=0; j<7; j++) {
+      tdTagCreate = document.createElement("td"); //열
+      tdTag = trTag.appendChild(tdTagCreate);
+      tdTag.classList.add("tdTagStyle");
+      tdTag.classList.add("NumBlank");
+
+      //7월은 월요일부터 시작, 1<=0 거짓 -> 한칸비우고 시작
+      //달의 마지막일까지만 출력
+      if(calendarMonthStartDay <= calendarPos && calendarDay < calendarMonthLastDate) { 
+        calendarDay++;
+        spanTagCreate = document.createElement("span");
+        spanTagCreate.innerHTML = calendarDay;
+        spanTag = tdTag.appendChild(spanTagCreate);
+        spanTag.classList.add("spanTagStyle");
+        spanTag.parentElement.classList.add("spanTagStyle_hover");
+        tdTag.classList.remove("NumBlank");
+      }
+      calendarPos++;
+    }
+  }
+}
+
+DrawCalDay();
 
 let s = document.querySelectorAll(".spanTagStyle");
 let d = document.querySelectorAll(".tdTagStyle");
@@ -282,10 +299,10 @@ function handleDayPrint(event) {
 let inputDate = document.querySelector(".span_date");
 
 function addCalDay(event) {
-  calendarYear += 1;
   calendarMonth += 1;
   console.log("jdfslk");
   //tableTagCreate.remove();
+  DrawCalDay();
 }
 
 d.forEach((boxItem) => {
@@ -293,6 +310,9 @@ d.forEach((boxItem) => {
     boxItem.addEventListener("click",handleDayPrint);;
   }
 })
+
+captionTag.addEventListener("click",addCalDay);;
+
   
 // let html = "";
 // html += "<table style=\"border-collapse: collapse;\"";
