@@ -153,12 +153,6 @@ let date = new Date();
 let calendarYear = 2025;
 let calendarMonth = 8;
 
-function addCalDay(event) {
-  calendarYear += 1;
-  calendarMonth += 1;
-  console.log("jdfslk");
-}
-
 let calendarToday = date.getDate();
 
 //달의 마지막일 계산 방법 1
@@ -175,8 +169,6 @@ if(calendarYear % 400 == 0) {
 
 //달의 마지막일 계산 방법 2
 let monthLastDate = new Date(calendarYear, calendarMonth, 0)  //일자가 0이면 마지막 일자 자동 계산
-// console.log(calendarMonth);
-// console.log(date.getMonth());
 let calendarMonthLastDate = monthLastDate.getDate();
 console.log(monthLastDate);
 
@@ -221,29 +213,6 @@ const theadTag = tableTag.appendChild(theadTagCreate);
 let trTagCreate = document.createElement("tr");
 let trTag = theadTag.appendChild(trTagCreate);
 
-// let thTagCreate = document.createElement("th"); 
-// thTagCreate.innerHTML = "일";
-// let thTag = trTag.appendChild(thTagCreate);
-// thTagCreate = document.createElement("th");
-// thTagCreate.innerHTML = "월";
-// thTag = trTag.appendChild(thTagCreate);
-// thTagCreate = document.createElement("th");
-// thTagCreate.innerHTML = "화";
-// thTag = trTag.appendChild(thTagCreate);
-// thTagCreate = document.createElement("th");
-// thTagCreate.innerHTML = "수";
-// thTag = trTag.appendChild(thTagCreate);
-// thTagCreate = document.createElement("th");
-// thTagCreate.innerHTML = "목";
-// thTag = trTag.appendChild(thTagCreate);
-// thTagCreate = document.createElement("th");
-// thTagCreate.innerHTML = "금";
-// thTag = trTag.appendChild(thTagCreate);
-// thTagCreate = document.createElement("th");
-// thTagCreate.innerHTML = "토";
-// thTag = trTag.appendChild(thTagCreate);
-// thTag.classList.add("thTagStyle");
-
 let days = ["일","월","화","수","목","금","토"];
 let thTagCreate;
 let thTag;
@@ -268,6 +237,7 @@ for(let i=0; i<calendarWeekCount; i++) {
     tdTagCreate = document.createElement("td"); //열
     tdTag = trTag.appendChild(tdTagCreate);
     tdTag.classList.add("tdTagStyle");
+    tdTag.classList.add("NumBlank");
 
     //7월은 월요일부터 시작, 1<=0 거짓 -> 한칸비우고 시작
     //달의 마지막일까지만 출력
@@ -278,9 +248,7 @@ for(let i=0; i<calendarWeekCount; i++) {
       spanTag = tdTag.appendChild(spanTagCreate);
       spanTag.classList.add("spanTagStyle");
       spanTag.parentElement.classList.add("spanTagStyle_hover");
-      // if(calendarDay == calendarToday) {
-      //   tdTag.classList.add("spanTodayTagStyle");
-      // }
+      tdTag.classList.remove("NumBlank");
     }
     calendarPos++;
   }
@@ -290,7 +258,6 @@ let s = document.querySelectorAll(".spanTagStyle");
 let d = document.querySelectorAll(".tdTagStyle");
 
 function handleDayPrint(event) {
-  // const selectDay = event.target;
   const selectDay = event.target.tagName === 'SPAN' ? event.target.parentElement : event.target;
   inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
 
@@ -298,7 +265,6 @@ function handleDayPrint(event) {
     if(item.classList.contains("spanTodayTagStyle")) {
       item.classList.remove("spanTodayTagStyle");
       item.parentNode.classList.add("spanTagStyle_hover");
-      console.log("sssssssss");
     }
   })
 
@@ -306,26 +272,28 @@ function handleDayPrint(event) {
     if(item.classList.contains("spanTodayTagStyle")) {
       item.classList.remove("spanTodayTagStyle");
       item.classList.add("spanTagStyle_hover");
-      console.log("dddddddddd");
     }
   })
 
   selectDay.classList.add("spanTodayTagStyle");
   selectDay.classList.remove("spanTagStyle_hover");
-  console.log("저거ㅓㅓㅓㅓㅓㅓ");
 }
 
 let inputDate = document.querySelector(".span_date");
 
-// s.forEach((boxItem) => {
-//   boxItem.addEventListener("click",handleDayPrint)});
+function addCalDay(event) {
+  calendarYear += 1;
+  calendarMonth += 1;
+  console.log("jdfslk");
+  //tableTagCreate.remove();
+}
 
 d.forEach((boxItem) => {
-  boxItem.addEventListener("click",handleDayPrint)});
-
-captionTag.addEventListener("click", addCalDay);
+  if(!boxItem.classList.contains("NumBlank")) {
+    boxItem.addEventListener("click",handleDayPrint);;
+  }
+})
   
-
 // let html = "";
 // html += "<table style=\"border-collapse: collapse;\"";
 // for(let i=0; i<calendarWeekCount; i++) {
