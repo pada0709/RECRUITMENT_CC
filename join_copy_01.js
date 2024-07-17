@@ -85,7 +85,7 @@ const optionNum = document.querySelectorAll(".optionNum");
 const arrowNum = document.querySelector(".arrowNum");
 
 selectNumBox.addEventListener("click", () => {
-  if(arrowNum.classList.contains("arrowNumRotate_2")) {
+  if (arrowNum.classList.contains("arrowNumRotate_2")) {
     arrowNum.classList.remove("arrowNumRotate_2");
   }
   if (arrowNum.classList.contains("arrowNumRotate")) {
@@ -119,7 +119,7 @@ const optionNum_2 = document.querySelectorAll(".optionNum_2");
 const arrowNum_2 = document.querySelector(".arrowNum_2");
 
 selectNumBox_2.addEventListener("click", () => {
-  if(arrowNum_2.classList.contains("arrowNumRotate_2")) {
+  if (arrowNum_2.classList.contains("arrowNumRotate_2")) {
     arrowNum_2.classList.remove("arrowNumRotate_2");
   }
   if (arrowNum_2.classList.contains("arrowNumRotate")) {
@@ -145,14 +145,6 @@ optionNum_2.forEach((optionItem) => {
   });
 });
 
-// 달력 그리기
-let date = new Date();
-
-let calendarYear = date.getFullYear();
-let calendarMonth = date.getMonth() + 1;
-
-let calendarToday = date.getDate();
-
 // 달력 img 클릭시 이벤트
 const calendar = document.querySelector("#calendar");
 const imgDate = document.querySelector(".select_date");
@@ -163,7 +155,15 @@ imgDate.addEventListener("click", () => {
   } else {
     calendar.classList.add("calendar_hidden");
   }
-})
+});
+
+// 달력 그리기
+let date = new Date();
+
+let calendarYear = date.getFullYear();
+let calendarMonth = date.getMonth() + 1;
+
+let calendarToday = date.getDate();
 
 //달력 그리기
 tableTagCreate = document.createElement("table");
@@ -181,115 +181,118 @@ const theadTag = tableTag.appendChild(theadTagCreate);
 let trTagCreate = document.createElement("tr");
 let trTag = theadTag.appendChild(trTagCreate);
 
-let days = ["일","월","화","수","목","금","토"];
+let days = ["일", "월", "화", "수", "목", "금", "토"];
 let thTagCreate;
 let thTag;
 
-for(let i=0; i<7; i++) {
+for (let i = 0; i < 7; i++) {
   thTagCreate = document.createElement("th");
   thTagCreate.innerHTML = days[i];
   thTag = trTag.appendChild(thTagCreate);
   thTag.classList.add("thTagStyle");
 }
 
-let trTagCreateArr = new Array();
-let spanTagArr = new Array();
-let tdTagArr = new Array();
+let trTagArr = new Array();
+let calendarWeekCount;
 
-for(let i=0; i<6; i++) {
-  trTagCreateArr[i] = document.createElement("tr"); //행
-  trTag = tableTag.appendChild(trTagCreateArr[i]);
-  spanTagArr[i] = new Array(7);
-  tdTagArr[i] = new Array(7);
-  for(let j=0; j<7; j++) {
-    tdTagCreate = document.createElement("td"); //열
-    tdTagArr[i][j] = trTag.appendChild(tdTagCreate);
-    tdTagArr[i][j].classList.add("tdTagStyle");
-    spanTagCreate = document.createElement("span");
-    spanTagArr[i][j] = tdTagArr[i][j].appendChild(spanTagCreate);
-  }
-}
+function DrawCal() {
+  captionTag.innerHTML = calendarYear + "년" + " ";
+  captionTag.innerHTML += calendarMonth + "월";
 
-function DrawCalDay() {
   //달의 마지막일 계산 방법 1
-  const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] //윤년계산
-  if(calendarYear % 400 == 0) {
+  const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; //윤년계산
+  if (calendarYear % 400 == 0) {
     monthDays[1] = 29;
-  } else if(calendarYear % 100 == 0) {
+  } else if (calendarYear % 100 == 0) {
     monthDays[1] = 28;
-  } else if(calendarYear % 4 == 0) {
+  } else if (calendarYear % 4 == 0) {
     monthDays[1] = 29;
   } //2월 29일은 4년 주기,,
 
   //let calendarMonthLastDate = monthDays[date.getMonth()];
 
   //달의 마지막일 계산 방법 2
-  let monthLastDate = new Date(calendarYear, calendarMonth, 0)  //일자가 0이면 마지막 일자 자동 계산
+  let monthLastDate = new Date(calendarYear, calendarMonth, 0); //일자가 0이면 마지막 일자 자동 계산
   let calendarMonthLastDate = monthLastDate.getDate();
   console.log(monthLastDate);
 
   //월의 시작 요일
-  let monthStartDay = new Date(calendarYear, calendarMonth-1, 1); //Date클래스는 일수 자동 +1
-  console.log("ddddd: "+ calendarYear);
+  let monthStartDay = new Date(calendarYear, calendarMonth - 1, 1); //Date클래스는 일수 자동 +1
+  console.log("ddddd: " + calendarYear);
   let calendarMonthStartDay = monthStartDay.getDay();
   console.log(monthStartDay);
   console.log("qqqqq:" + calendarMonthStartDay); //0이 일요일
   console.log(date.getMonth());
 
   //주 수 카운트
-  let calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7);
-  captionTag.innerHTML = calendarYear + "년" + " ";
-  captionTag.innerHTML += calendarMonth + "월";
+  calendarWeekCount = Math.ceil(
+    (calendarMonthStartDay + calendarMonthLastDate) / 7
+  );
 
-  let spanTagCreate,spanTag;
+  let spanTagCreate;
+  let spanTag;
 
-  let calendarPos = 0;  //위치
-  let calendarDay = 0;  //날짜
+  let calendarPos = 0; //위치
+  let calendarDay = 0; //날짜
 
-  for(let i=0; i<6; i++) {
-    for(let j=0; j<7; j++) {
-      spanTagArr[i][j].innerHTML = '';
-      tdTagArr[i][j].classList.add("NumBlank");
-    }
-  }
+  for (let i = 0; i < calendarWeekCount; i++) {
+    trTagCreate = document.createElement("tr"); //행
+    trTagArr[i] = tableTag.appendChild(trTagCreate);
+    for (let j = 0; j < 7; j++) {
+      tdTagCreate = document.createElement("td"); //열
+      tdTag = trTagArr[i].appendChild(tdTagCreate);
+      tdTag.classList.add("tdTagStyle");
+      tdTag.classList.add("NumBlank");
 
-  for(let i=0; i<calendarWeekCount; i++) {
-    for(let j=0; j<7; j++) {
       //7월은 월요일부터 시작, 1<=0 거짓 -> 한칸비우고 시작
       //달의 마지막일까지만 출력
-      if(calendarMonthStartDay <= calendarPos && calendarDay < calendarMonthLastDate) { 
+      if (
+        calendarMonthStartDay <= calendarPos &&
+        calendarDay < calendarMonthLastDate
+      ) {
         calendarDay++;
-        spanTagArr[i][j].innerHTML = calendarDay;
-        spanTagArr[i][j].parentElement.classList.add("spanTagStyle_hover");
-        tdTagArr[i][j].classList.remove("NumBlank");
+        spanTagCreate = document.createElement("span");
+        spanTagCreate.innerHTML = calendarDay;
+        spanTag = tdTag.appendChild(spanTagCreate);
+        spanTag.classList.add("spanTagStyle");
+        spanTag.parentElement.classList.add("spanTagStyle_hover");
+        tdTag.classList.remove("NumBlank");
       }
       calendarPos++;
     }
   }
 }
 
-DrawCalDay();
+function RemoveCalTag() {
+  for (let i = 0; i < calendarWeekCount; i++) {
+    trTagArr[i].remove();
+  }
+}
+
+DrawCal();
 
 let s = document.querySelectorAll(".spanTagStyle");
 let d = document.querySelectorAll(".tdTagStyle");
 
 function handleDayPrint(event) {
-  const selectDay = event.target.tagName === 'SPAN' ? event.target.parentElement : event.target;
-  inputDate.innerText = calendarYear + "." + calendarMonth + "." + selectDay.innerText;
+  const selectDay =
+    event.target.tagName === "SPAN" ? event.target.parentElement : event.target;
+  inputDate.innerText =
+    calendarYear + "." + calendarMonth + "." + selectDay.innerText;
 
   s.forEach((item) => {
-    if(item.classList.contains("spanTodayTagStyle")) {
+    if (item.classList.contains("spanTodayTagStyle")) {
       item.classList.remove("spanTodayTagStyle");
       item.parentNode.classList.add("spanTagStyle_hover");
     }
-  })
+  });
 
   d.forEach((item) => {
-    if(item.classList.contains("spanTodayTagStyle")) {
+    if (item.classList.contains("spanTodayTagStyle")) {
       item.classList.remove("spanTodayTagStyle");
       item.classList.add("spanTagStyle_hover");
     }
-  })
+  });
 
   selectDay.classList.add("spanTodayTagStyle");
   selectDay.classList.remove("spanTagStyle_hover");
@@ -299,22 +302,22 @@ let inputDate = document.querySelector(".span_date");
 
 function addCalDay(event) {
   calendarMonth += 1;
-  if(calendarMonth > 12) {
+  if (calendarMonth > 12) {
     calendarYear += 1;
     calendarMonth = 1;
   }
-  DrawCalDay();
+  RemoveCalTag();
+  DrawCal();
 }
 
 d.forEach((boxItem) => {
-  if(!boxItem.classList.contains("NumBlank")) {
-    boxItem.addEventListener("click",handleDayPrint);;
+  if (!boxItem.classList.contains("NumBlank")) {
+    boxItem.addEventListener("click", handleDayPrint);
   }
-})
+});
 
-captionTag.addEventListener("click",addCalDay);
+captionTag.addEventListener("click", addCalDay);
 
-  
 // let html = "";
 // html += "<table style=\"border-collapse: collapse;\"";
 // for(let i=0; i<calendarWeekCount; i++) {
@@ -326,12 +329,3 @@ captionTag.addEventListener("click",addCalDay);
 // }
 // html += "</table>";
 // $("#calendar").html(html);
-
-
-
-
-
-
-
-
-
