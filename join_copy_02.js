@@ -146,7 +146,7 @@ optionNum_2.forEach((optionItem) => {
 });
 
 // 달력 img 클릭시 이벤트
-// const calendar = document.querySelector("#calendar");
+const calendar = $("#calendar");
 // const imgDate = document.querySelector(".select_date");
 
 // imgDate.addEventListener("click", () => {
@@ -174,20 +174,27 @@ let calendarMonth = date.getMonth() + 1;
 let calendarToday = date.getDate();
 
 //달력 그리기
-tableTagCreate = document.createElement("table");
+// tableTagCreate = document.createElement("table");
+//let tableTagCreate = $("<table>");
 
-tableTagCreate.classList.add("tableStyle");
-const tableTag = calendar.appendChild(tableTagCreate);
+//tableTagCreate.addClass("tableStyle");
+//const tableTag = calendar.append(tableTagCreate);
+$("<table>").appendTo("#calendar");
+$("table").addClass("tableStyle");
 
-let captionTagCreate = document.createElement("caption"); //월 표시
-const captionTag = tableTag.appendChild(captionTagCreate);
-captionTag.classList.add("captionTagStyle");
+//let captionTagCreate = $("caption"); //월 표시
+//const captionTag = tableTag.append(captionTagCreate);
+//captionTag.addClass("captionTagStyle");
+$("<caption>").appendTo($("table"));
+$("caption").addClass("captionTagStyle");
 
-let theadTagCreate = document.createElement("thead"); //요일 표시
-const theadTag = tableTag.appendChild(theadTagCreate);
+//let theadTagCreate = $("thead"); //요일 표시
+//const theadTag = tableTag.append(theadTagCreate);
+$("<thead>").appendTo($("table"));
 
-let trTagCreate = document.createElement("tr");
-let trTag = theadTag.appendChild(trTagCreate);
+//let trTagCreate = $("tr");
+//let trTag = theadTag.append(trTagCreate);
+$("<tr>").appendTo("thead");
 
 let days = ["일", "월", "화", "수", "목", "금", "토"];
 let thTagCreate;
@@ -235,21 +242,26 @@ function DrawCal() {
     (calendarMonthStartDay + calendarMonthLastDate) / 7
   );
 
-  let spanTagCreate;
-  let spanTag;
-
   let calendarPos = 0; //위치
   let calendarDay = 0; //날짜
 
   for (let i = 0; i < calendarWeekCount; i++) {
-    trTagCreate = document.createElement("tr"); //행
-    trTagArr[i] = tableTag.appendChild(trTagCreate);
+    // trTagCreate = $("<tr></tr>"); //행
+    $("<tr>")
+      .appendTo("table")
+      .addClass(`week_${i + 1}`);
+    // calendar.append(trTagCreate);
+    // trTagArr[i] = tableTag.append(trTagCreate);
     for (let j = 0; j < 7; j++) {
-      tdTagCreate = document.createElement("td"); //열
-      tdTag = trTagArr[i].appendChild(tdTagCreate);
-      $("td").addClass("tdTagStyle NumBlank");
+      //tdTagCreate = $("td"); //열
+      //tdTag = trTagArr[i].append(tdTagCreate);
+      //$(tdTag).addClass("tdTagStyle NumBlank");
       //tdTag.classList.add("tdTagStyle");
       //tdTag.classList.add("NumBlank");
+      let tdTag = $("<td>")
+        .appendTo(`tr[class^=week_${i + 1}]`)
+        .addClass(`day_${j + 1}`);
+      $(tdTag).addClass("tdTagStyle NumBlank");
 
       //7월은 월요일부터 시작, 1<=0 거짓 -> 한칸비우고 시작
       //달의 마지막일까지만 출력
@@ -261,12 +273,22 @@ function DrawCal() {
         //spanTagCreate = document.createElement("span");
         //spanTagCreate.innerHTML = calendarDay;
         //spanTag = tdTag.appendChild(spanTagCreate);
-        $(tdTag).text(calendarDay);
+        let spanTag = $(document.createElement("span"));
+        $(spanTag).appendTo($(tdTag));
+        $(spanTag).text(calendarDay);
+        $("td span").addClass("spanTagStyle");
+        $(spanTag).parent().addClass("spanTagStyle_hover");
         $(tdTag).removeClass("NumBlank");
+        /*
+        $("<span>")
+          .appendTo(`td[class^=day_${j + 1}]`)
+          .addClass(`span${calendarDay}`);
+          */
+        //$(tdTag).removeClass("NumBlank");
+        //tdTag.classList.remove("NumBlank");
         //$("span").addClass("spanTagStyle");
         //spanTag.classList.add("spanTagStyle");
         // spanTag.parentElement.classList.add("spanTagStyle_hover");
-        // tdTag.classList.remove("NumBlank");
       }
       calendarPos++;
     }
@@ -275,7 +297,7 @@ function DrawCal() {
 
 function RemoveCalTag() {
   for (let i = 0; i < calendarWeekCount; i++) {
-    $(trTagArr[i]).empty();
+    $(`tr[class^=week_${i + 1}`).remove();
   }
 }
 
@@ -318,11 +340,11 @@ function handleDayPrint(event) {
   //   }
   // });
 
-  $(selectDay).addClass("spanTodayTagStyle");
+  $(selecDtay).addClass("spanTodayTagStyle");
   $(selectDay).removeClass("spanTagStyle_hover");
 }
 
-let inputDate = document.querySelector(".span_date");
+//let inputDate = document.querySelector(".span_date");
 
 function addCalDay(event) {
   calendarMonth += 1;
@@ -346,7 +368,7 @@ $(".tdTagStyle").each(function (index, item) {
   }
 });
 
-$(captionTag).click(addCalDay);
+$("caption").click(addCalDay);
 
 // let html = "";
 // html += "<table style=\"border-collapse: collapse;\"";
